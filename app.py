@@ -195,7 +195,14 @@ elif page == "Forecast Explorer":
         )
         filtered = df[df["Region"] == selected]
 
-    monthly = filtered.groupby("Order Date")["Sales"].sum().resample("M").sum()
+    # Make sure Order Date is datetime
+    filtered["Order Date"] = pd.to_datetime(filtered["Order Date"])
+
+
+    monthly = filtered.set_index("Order Date")
+
+
+    monthly = monthly["Sales"].resample("ME").sum()
 
     st.subheader("Historical Monthly Sales")
 
