@@ -236,7 +236,7 @@ elif page == "Forecast Explorer":
     future_dates = pd.date_range(
         start=monthly.index[-1],
         periods=months + 1,
-        freq="M"
+        freq="ME"
     )[1:]
 
     fig, ax = plt.subplots(figsize=(12, 5))
